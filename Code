@@ -1,29 +1,29 @@
-setwd("/Users/jeevarehakrishnaraj/Desktop/Springboard/Project 1")
-compdata = read.csv("refine_original.csv")
 
-install.packages("tidyr")
-library(dplyr)
-library(tidyr)
-install.packages("data.table")
-compdata$company[1:6] <- 'philips'
-compdata$company[7:13] <- 'akzo'
-compdata$company[14:16] <- 'philips'
-compdata$company[17:21] <- 'van houten'
-compdata$company[22:25] <- 'unilever'
+# Load the data in RStudio
+
+data_dir <- "/Users/jeevarehakrishnaraj/Desktop/Springboard/Project 1/JP"
+compdata <- read.csv(file.path(data_dir,"refine_original.csv"),header = TRUE)
+installed.packages()
+compdata$company <- tolower(compdata$company)
+compdata$company <- gsub("ph.*","philips",compdata$company)
+compdata$company <- gsub("ak.*","akzo",compdata$company)
+compdata$company <- gsub("f.*","philips",compdata$company)
+compdata$company <- gsub("un.*","unilever",compdata$company)
+compdata$company <- gsub("va.*","van houten",compdata$company)
+
+# Separate product code and number
+newcompdata <- separate(data = compdata, col = Product.code...number, into = c("product_code", "product_number"), sep = "-") 
+
+
+# Add product categories
 compfunction <- function(x){switch(x, p = "Smartphone",v = "TV", x= "Laptop", q = "Tablet")}
-pickproduct <- function(x){ifelse(x == 'p', 'Smartphone',ifelse(x=='v','TV',ifelse(x=='x','Laptop',ifelse(x == 'q','Tablet',NA))))}
-newcompdata <- separate(data = compdata, col = Product.code...number, into = c("product_code", "product_number"), sep = "-") %>%
 
-mutate(company = tolower(company)) %>%
-mutate(product_category = pickproduct(product_code)) %>%
-mutate(full_address = paste(address, city, country, sep=", ")) %>%
-mutate(company_philips = ifelse(company == 'phillips', 1, 0)) %>%
-mutate(company_akzo = ifelse(company == 'akzo', 1, 0)) %>%
+pickproduct <- function(x){ifelse(x == 'p', 'Smartphone', ifelse(x=='v','TV',ifelse(x=='x','Laptop',ifelse(x == 'q','Tablet',NA))))}
 
-mutate(company_van_houten = ifelse(company == 'van houten', 1, 0)) %>%
-mutate(company_unilever = ifelse(company == 'unilever', 1, 0)) %>%
-mutate(product_smartphone = ifelse(product_code == 'p', 1, 0)) %>%
-mutate(product_tv = ifelse(product_code == 'v', 1, 0)) %>%
-mutate(product_laptop = ifelse(product_code == 'x', 1, 0)) %>%
-mutate(product_tablet = ifelse(product_code == 'q', 1, 0))
+# Add full address for geocoding & Create dummy variables for company and product category
+newcompdata <- newcompdata %>% 
++ mutate(product_category = pickproduct(product_code), full_address = paste(address, city, country, sep=", "),company_philips = ifelse(company == 'phillips', 1, 0),company_akzo = ifelse(company == 'akzo', 1, 0),company_van_houten = ifelse(company == 'van houten', 1, 0),company_unilever = ifelse(company == 'unilever', 1, 0),product_smartphone = ifelse(product_code == 'p', 1, 0),product_tv = ifelse(product_code == 'v', 1, 0),product_laptop = ifelse(product_code == 'x', 1, 0),product_tablet = ifelse(product_code == 'q', 1, 0))
+
+# Submit the project 
 write.csv(newcompdata, file = "refine_clean.csv")
+
