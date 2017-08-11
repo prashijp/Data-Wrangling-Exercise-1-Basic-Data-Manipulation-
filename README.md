@@ -22,3 +22,7 @@ Both the company name and product category are categorical variables i.e. they t
 
 #### Submit the project on Github
 Include your code, the original data as a CSV file refine_original.csv, and the cleaned up data as a CSV file called refine_clean.csv.
+
+#### Packages
+1. dplyr   
+2. tidyr   
