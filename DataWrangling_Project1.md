@@ -54,7 +54,7 @@ Both the company name and product category are categorical variables i.e. they t
 newcomp_data <- newcomp_data %>% mutate(product_category = pickproduct(product_code), full_address = paste(address, city, country, sep=", "),company_philips = ifelse(company == 'phillips', 1, 0),company_akzo = ifelse(company == 'akzo', 1, 0),company_van_houten = ifelse(company == 'van houten', 1, 0),company_unilever = ifelse(company == 'unilever', 1, 0),product_smartphone = ifelse(product_code == 'p', 1, 0),product_tv = ifelse(product_code == 'v', 1, 0),product_laptop = ifelse(product_code == 'x', 1, 0),product_tablet = ifelse(product_code == 'q', 1, 0))
 ```
 
-#### Submit the project on Github
+#### Submit the project
 Include your code, the original data as a CSV file refine_original.csv, and the cleaned up data as a CSV file called refine_clean.csv.
 
 ```r
