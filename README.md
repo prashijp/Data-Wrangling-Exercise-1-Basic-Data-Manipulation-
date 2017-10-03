@@ -26,3 +26,4 @@ Include your code, the original data as a CSV file refine_original.csv, and the 
 #### Packages
 1. dplyr   
 2. tidyr   
+3. stringr
