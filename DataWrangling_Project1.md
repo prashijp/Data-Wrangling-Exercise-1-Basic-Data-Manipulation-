@@ -11,25 +11,29 @@ Save the data set as a CSV file called refine_original.csv and load  the dataset
 ```r
 data_dir <- "/Users/jeevarehakrishnaraj/Desktop/Springboard/Project 1/JP"
 comp_data <- read.csv(file.path(data_dir,"refine_original.csv"),header = TRUE)
+colnames(comp_data)
 ```
 
 #### Clean up brand names
 Clean up the 'company' column so all of the misspellings of the brand names are standardized. For example, you can transform the values in the column to be: philips, akzo, van houten and unilever (all lowercase)
 
 ```r
+comp_data$company
 comp_data$company <- tolower(comp_data$company)
 comp_data$company <- str_replace(comp_data$company, "ph.*","philips")
 comp_data$company <- str_replace(comp_data$company, "ak.*","akzo")
 comp_data$company <- str_replace(comp_data$company, "f.*","philips")
 comp_data$company <- str_replace(comp_data$company, "un.*","unilever")
 comp_data$company <- str_replace(comp_data$company, "va.*","van houten")
+comp_data$company
 ```
 
 #### Separate product code and number    
 Separate the product code and product number into separate columns i.e. add two new columns called product_code and product_number, containing the product code and number respectively
 
 ```r
-newcomp_data <- separate(data = comp_data, col = Product.code...number, into = c("product_code", "product_number"), sep = "-") 
+newcomp_data <- separate(data = comp_data, col = Product.code...number, into = c("product_code", "product_number"), sep = "-")
+colnames(newcomp_data)
 ```
 
 #### Add product categories  
