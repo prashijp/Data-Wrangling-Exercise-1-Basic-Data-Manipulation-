@@ -12,7 +12,7 @@ The following steps needs to completed to finish the exercise
 Save the data set as a CSV file called titanic_original.csv and load it in RStudio into a data frame.  
 
 ```r
-data_dir <- "/Users/jeevarehakrishnaraj/Desktop/Springboard/Project 2/Project2"
+data_dir <- "~/Desktop/Springboard/Project 2/Project2"
 titanic_original <- read.csv(file.path (data_dir, "titanic_original.csv" ), header = TRUE)
 ```
 
