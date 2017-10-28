@@ -1,6 +1,6 @@
 
 # Load the data in RStudio
-data_dir <- "/Users/jeevarehakrishnaraj/Desktop/Springboard/Project 1/JP"
+data_dir <- "~/Desktop/Springboard/Project 1/JP"
 comp_data <- read.csv(file.path(data_dir,"refine_original.csv"),header = TRUE)
 colnames(comp_data)
 
